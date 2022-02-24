@@ -1,0 +1,68 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+button {
+   all: unset;
+}
+
+$circle: 80px;
+$color: rgb(92, 92, 146);
+$padding: 5px;
+
+%grid-type {
+   grid-column-start: 1;
+   grid-column-end: 3;
+   border-radius: 5px;
+}
+
+.button {
+   right: 0;
+   bottom: 0;
+   position: absolute;
+   margin-right: $circle/2;
+   margin-bottom: $circle/2;
+   width: $circle;
+   height: $circle;
+   border-radius: $circle/2;
+   background: red;
+}
+
+.chat {
+   // display: none;
+   display: grid;
+   grid-row-gap: 10px;
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   width: 300px;
+   padding: $padding;
+   margin-right: $circle - $padding;
+   margin-bottom: $circle - $padding;
+
+
+   .chat__label, .chat__close {
+      font-size: x-large;
+      font-weight: bold;
+      grid-row-start: 1;
+   }
+
+   .chat__close {
+      text-align: end;
+   }
+
+   .chat__field {
+      resize: none;
+      height: 300px;
+      @extend %grid-type;
+   }
+
+   .chat__submit {
+      padding: $padding;
+      border: 1px solid $color;
+      background-color: $color;
+      @extend %grid-type;
+      text-align: center;
+   }
+}
