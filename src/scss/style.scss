@@ -8,8 +8,17 @@ button {
 }
 
 $circle: 80px;
-$color: rgb(92, 92, 146);
+$bigCircle: 100px;
+$color: gray;
 $padding: 5px;
+
+@mixin circle-switch($width, $height, $border-radius, $margin-right, $margin-bottom) {
+   width: $width;
+   height: $height;
+   border-radius: $border-radius;
+   margin-right: $margin-right;
+   margin-bottom: $margin-bottom;
+}
 
 %grid-type {
    grid-column-start: 1;
@@ -21,26 +30,39 @@ $padding: 5px;
    right: 0;
    bottom: 0;
    position: absolute;
-   margin-right: $circle/2;
-   margin-bottom: $circle/2;
-   width: $circle;
-   height: $circle;
-   border-radius: $circle/2;
+   @include circle-switch($circle, $circle, $circle/2, $circle/2, $circle/2);
    background: red;
+   will-change: width, height, border-radius, margin-right, margin-bottom;
+   transition: width 0.1s linear, height 0.1s linear, border-radius 0.1s linear, margin-right 0.1s linear, margin-bottom 0.1s linear;
+}
+
+.hover {
+   &:hover {
+      cursor: pointer;
+      @include circle-switch($bigCircle, $bigCircle, $bigCircle/2, 30px, 30px);
+   }
+}
+
+.hidden {
+   @include circle-switch(0, 0, 0, $circle, $circle);
 }
 
 .chat {
-   // display: none;
    display: grid;
    grid-row-gap: 10px;
    position: absolute;
    right: 0;
    bottom: 0;
-   width: 300px;
+   min-width: 300px;
+   height: 0;
    padding: $padding;
    margin-right: $circle - $padding;
    margin-bottom: $circle - $padding;
-
+   // box-shadow: 0px 0px 5px 5px gray;
+   border-radius: 5px;
+   overflow: hidden;
+   will-change: height, width;
+   transition: height 5 linear;
 
    .chat__label, .chat__close {
       font-size: x-large;
@@ -53,13 +75,12 @@ $padding: 5px;
    }
 
    .chat__field {
-      resize: none;
       height: 300px;
       @extend %grid-type;
    }
 
    .chat__submit {
-      padding: $padding;
+      padding: 10px;
       border: 1px solid $color;
       background-color: $color;
       @extend %grid-type;
