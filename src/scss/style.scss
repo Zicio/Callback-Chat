@@ -34,11 +34,11 @@ $padding: 5px;
    background: red;
    will-change: width, height, border-radius, margin-right, margin-bottom;
    transition: width 0.1s linear, height 0.1s linear, border-radius 0.1s linear, margin-right 0.1s linear, margin-bottom 0.1s linear;
+   cursor: pointer;
 }
 
 .hover {
    &:hover {
-      cursor: pointer;
       @include circle-switch($bigCircle, $bigCircle, $bigCircle/2, 30px, 30px);
    }
 }
@@ -53,16 +53,13 @@ $padding: 5px;
    position: absolute;
    right: 0;
    bottom: 0;
-   min-width: 300px;
-   height: 0;
+   min-width: 400px;
    padding: $padding;
    margin-right: $circle - $padding;
    margin-bottom: $circle - $padding;
-   // box-shadow: 0px 0px 5px 5px gray;
+   box-shadow: 0px 0px 5px 5px gray;
    border-radius: 5px;
-   overflow: hidden;
-   will-change: height, width;
-   transition: height 5 linear;
+   opacity: 0;
 
    .chat__label, .chat__close {
       font-size: x-large;
@@ -72,6 +69,7 @@ $padding: 5px;
 
    .chat__close {
       text-align: end;
+      cursor: pointer;
    }
 
    .chat__field {
@@ -87,3 +85,24 @@ $padding: 5px;
       text-align: center;
    }
 }
+
+.active {
+   animation: scale 0.1s forwards;
+   @keyframes scale {
+      0% {opacity: 0;}
+      1% {opacity: 1;}
+      100% {transform: scale(1.1);}
+   }
+   opacity: 1;
+
+}
+.disactive {
+   animation: scale-out 0.1s forwards;
+   @keyframes scale-out {
+      0% {opacity: 1;}
+      100% {transform: scale(0.9);
+         opacity: 0;}
+   }
+}
+
+

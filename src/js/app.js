@@ -3,10 +3,8 @@ import Dom from './Dom';
 export default class Widget {
   constructor(element) {
     this.element = element;
-    this.chat = this.element.querySelector('.chat');
 
     this.clickListener();
-    this.transitionListener();
   }
 
   clickListener() {
@@ -17,11 +15,11 @@ export default class Widget {
     if (e.target.classList.contains('button')) {
       Dom.showButton(e.target);
       Dom.showChat();
+      return;
     }
-  }
-
-  transitionListener() {
-    this.chat.addEventListener('transitionend', (e) => Dom.autoSize(e.target));
+    if (e.target.classList.contains('chat__close')) {
+      Dom.showChat();
+    }
   }
 }
 

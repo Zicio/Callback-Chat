@@ -4,24 +4,20 @@ export default class Dom {
   }
 
   static showButton(e) {
-    e.classList.add('hidden');
-    e.classList.remove('hover');
+    e.classList.toggle('hidden');
+    e.classList.toggle('hover');
   }
 
-  static showChat() {
+  static showChat(e) {
     const chat = document.querySelector('.chat');
-    if (chat.style.height === '') {
-      chat.style.height = `${chat.scrollHeight}px`;
-    } else {
-      chat.style.height = `${chat.scrollHeight}px`;
-      // window.getComputedStyle(chat, null).getPropertyValue("height");
-      chat.style.height = '0';
+    if (!chat.classList.contains('active')) {
+      chat.classList.add('active');
+      chat.classList.remove('disactive');
+      return;
     }
-  }
-
-  static autoSize(e) {
-    if (e.style.height !== '0px') {
-      e.style.height = 'auto';
-    }
+    chat.classList.remove('active');
+    chat.classList.add('disactive');
+    const button = document.querySelector('.button');
+    Dom.showButton(button);
   }
 }
